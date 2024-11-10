@@ -1,0 +1,29 @@
+(* Problem 1 Solution *)
+a.  if A then false else B
+A false B
+_____________________
+|   A (\x.\y.y) B   |
+---------------------
+
+Specific case examples:
+A is false, B is false: false false false -> (\x.\y.y) (\x.\y.y) (\x.\y.y) -> \x.\y.y (false) correct
+A is false, B is true:  false false true ->  (\x.\y.y) (\x.\y.y) (\x.\y.x) -> \x.\y.x (true)  correct
+A is true,  B is false: true  false false -> (\x.\y.x) (\x.\y.y) (\x.\y.y) -> \x.\y.y (false) correct
+A is true,  B is true:  true  false true ->  (\x.\y.x) (\x.\y.y) (\x.\y.x) -> \x.\y.y (false) correct
+
+(* Problem 2 Solution *)
+A implies (not B)
+"If A is true, then (not B) must also be true"
+"P implies Q" -> (not P) or Q
+Plug in A and B: (not A) or (not B)
+if (not A) then true else (not B)
+(not A) (\x.\y. x) (not B)
+_____________________________________________________________________
+|   (A (\x.\y. y)(\x.\y. x)) (\x.\y. x) (B (\x.\y. y)(\x.\y. x))    |
+---------------------------------------------------------------------
+
+Specific case examples:
+A is false, B is false: ((\x.\y. y) (\x.\y. y)(\x.\y. x)) (\x.\y. x) ((\x.\y. y) (\x.\y. y)(\x.\y. x)) -> \x.\y.x (true)  correct
+A is false, B is true:  ((\x.\y. y) (\x.\y. y)(\x.\y. x)) (\x.\y. x) ((\x.\y. x) (\x.\y. y)(\x.\y. x)) -> \x.\y.x (true)  correct
+A is true,  B is false: ((\x.\y. x) (\x.\y. y)(\x.\y. x)) (\x.\y. x) ((\x.\y. y) (\x.\y. y)(\x.\y. x)) -> \x.\y.x (true)  correct
+A is true,  B is true:  ((\x.\y. x) (\x.\y. y)(\x.\y. x)) (\x.\y. x) ((\x.\y. x) (\x.\y. y)(\x.\y. x)) -> \x.\y.y (false) correct
