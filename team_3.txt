@@ -27,3 +27,52 @@ A is false, B is false: ((\x.\y. y) (\x.\y. y)(\x.\y. x)) (\x.\y. x) ((\x.\y. y)
 A is false, B is true:  ((\x.\y. y) (\x.\y. y)(\x.\y. x)) (\x.\y. x) ((\x.\y. x) (\x.\y. y)(\x.\y. x)) -> \x.\y.x (true)  correct
 A is true,  B is false: ((\x.\y. x) (\x.\y. y)(\x.\y. x)) (\x.\y. x) ((\x.\y. y) (\x.\y. y)(\x.\y. x)) -> \x.\y.x (true)  correct
 A is true,  B is true:  ((\x.\y. x) (\x.\y. y)(\x.\y. x)) (\x.\y. x) ((\x.\y. x) (\x.\y. y)(\x.\y. x)) -> \x.\y.y (false) correct
+
+(* Problem 3 Solution *)
+
+A XOR B =>
+A AND (NOT B) OR (NOT A) AND B
+
+NOT A => (A (\xy.y) (\xy.x))
+NOT B => (A (\xy.y) (\xy.x))
+
+Term 1 => A (A (\xy.y) (\xy.x)) (\xy.y)
+Term 2 => (A (\xy.y) (\xy.x)) B (\xy.y)
+
+Term 1 OR Term 2 => Final Answer
+
+(A (A (\xy.y) (\xy.x)) (\xy.y)) (\xy.x) ((A (\xy.y) (\xy.x)) B (\xy.y))
+
+
+(* Problem 4 Solution *)
+
+Base Case:
+    n = 0
+    ( 2^(n+1) + 1, 2^n + 1 )
+    ( 2^(0+1) + 1, 2^0 + 1 )
+    ( 2^(1)   + 1, 1 + 1 )
+    ( 2   + 1, 2 )
+    ( 3, 2 ) HOLDS true
+
+Assume: (x,y) =  ( 2^(n+1) + 1, 2^n + 1 )
+
+Prove: (3x - 2y, x) has form ( 2^(n+1) + 1, 2^n + 1 )
+
+Step: x = 2^(n+1) + 1
+      y = 2^n + 1
+
+      ( 3(2^(n+1) + 1) - 2(2^n + 1), 2^(n+1) + 1 ) =>
+
+      ( 3 * 2^(n+1) + 3 - 2 * 2^n - 2, 2^(n+1) + 1 ) =>
+
+      ( 3 * 2^(n+1) - 2 * 2^n + 3 - 2, 2^(n+1) + 1 ) =>
+
+      ( 2 * 2^(n+1) + 1, 2^(n+1) + 1 ) =>
+
+      ( 2^(n+2) + 1, 2^(n+1) + 1)  
+
+      This holds for k = n + 1 which is our step therfore every element of S 
+      will hold the form ( 2^(n+1) + 1, 2^n + 1 )
+
+    
+
