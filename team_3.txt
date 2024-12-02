@@ -75,4 +75,71 @@ Step: x = 2^(n+1) + 1
       will hold the form ( 2^(n+1) + 1, 2^n + 1 )
 
     
+(* Problem 5 Solution *)
+rev ( inorder ( reflect x ) ) = inorder x (* rev for lists *)
 
+Define base case:
+x = []
+rev ( inorder ( reflect [] ) ) = inorder []
+LHS = rev ( inorder (reflect [] ) ) 
+    = rev ( inorder [] )            * by the code of reflect *
+    = rev ( [] )                    * by the code of inorder *
+    = []                            * empty list, by the code of rev *
+RHS = inorder []                    
+    = []                            * empty list, by the code of inorder *
+LHS = RHS
+
+Induction Hypothesis:
+Assume for a list x of length n:
+rev (inorder (reflect x)) = inorder x
+
+Induction Step:
+Consider a list (a::x) of length n+1:
+LHS = rev (inorder (reflect (a::x)))
+    = rev (inorder (reflect x @ [a]))       * by the code of reflect *
+    = rev (inorder (reflect x) @ [a])       * by the code of inorder *
+    = rev ([a] @ inorder (reflect x))       * by the code of rev *
+    = rev ([a]) @ rev (inorder (reflect x)) * by code of @ *
+    = [a] @ rev (inorder (reflect x))       * by the code of rev *
+    = [a] @ inorder x                       * by IH *
+RHS = inorder (a::x)
+    = [a] @ inorder x                       * by the code of inorder *
+LHS = RHS
+
+Since the base case is true and the induction step is true, then the statement
+"rev ( inorder ( reflect x ) ) = inorder x" is true by structural induction.
+
+
+(* Problem 6 Solution *)
+postorder ( reflect x ) = rev ( preorder x )
+
+Define Base case:
+x = []
+
+LHS = postorder ( reflect [] )
+    = postorder []                  * by the code of reflect *
+    = []                            * empty list, by the code of preorder *
+RHS = rev ( preorder [] )
+    = rev []                        * by the code of preorder *
+    = []                            * empty list, by the code of rev *
+LHS = RHS
+
+Induction Hypothesis:
+Assume for a list x of length n:
+postorder (reflect x) = rev (preorder x)
+
+Induction Step:
+Consider a list (a::x) of length n+1:
+LHS = postorder (reflect (a::x))
+    = postorder (reflect x @ [a])       * by the code of reflect *
+    = postorder (reflect x) @ postorder ([a]) * by the code of postorder *
+    = postorder (reflect x) @ [a]       * by the code of postorder *
+    = rev (preorder x) @ [a]            * by IH *
+RHS = rev (preorder (a::x))
+    = rev ([a] @ preorder x)            * by the code of preorder *
+    = rev (preorder x) @ rev ([a])      * by the code of rev *
+    = rev (preorder x) @ [a]            * by the code of rev *
+LHS = RHS
+
+Since the base case is true and the induction step is true, then the statement
+"postorder ( reflect x ) = rev ( preorder x )" is true by structural induction.
