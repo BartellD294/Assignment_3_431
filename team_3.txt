@@ -75,9 +75,6 @@ Step: x = 2^(n+1) + 1
       will hold the form ( 2^(n+1) + 1, 2^n + 1 )
 
     
-
-
-
 (* Problem 5 Solution *)
 rev ( inorder ( reflect x ) ) = inorder x (* rev for lists *)
 
@@ -102,7 +99,7 @@ LHS = rev (inorder (reflect (a::x)))
     = rev (inorder (reflect x @ [a]))       * by the code of reflect *
     = rev (inorder (reflect x) @ [a])       * by the code of inorder *
     = rev ([a] @ inorder (reflect x))       * by the code of rev *
-    = rev ([a]) @ rev (inorder (reflect x)) * by code of rev *
+    = rev ([a]) @ rev (inorder (reflect x)) * by code of @ *
     = [a] @ rev (inorder (reflect x))       * by the code of rev *
     = [a] @ inorder x                       * by IH *
 RHS = inorder (a::x)
@@ -110,7 +107,7 @@ RHS = inorder (a::x)
 LHS = RHS
 
 Since the base case is true and the induction step is true, then the statement
-"rev ( inorder ( reflect x ) ) = inorder x" is true.
+"rev ( inorder ( reflect x ) ) = inorder x" is true by structural induction.
 
 
 (* Problem 6 Solution *)
@@ -145,4 +142,4 @@ RHS = rev (preorder (a::x))
 LHS = RHS
 
 Since the base case is true and the induction step is true, then the statement
-"postorder ( reflect x ) = rev ( preorder x )" is true.
+"postorder ( reflect x ) = rev ( preorder x )" is true by structural induction.
