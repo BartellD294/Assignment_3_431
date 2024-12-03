@@ -34,14 +34,14 @@ A XOR B =>
 A AND (NOT B) OR (NOT A) AND B
 
 NOT A => (A (\xy.y) (\xy.x))
-NOT B => (A (\xy.y) (\xy.x))
+NOT B => (B (\xy.y) (\xy.x))
 
-Term 1 => A (A (\xy.y) (\xy.x)) (\xy.y)
+Term 1 => A (B (\xy.y) (\xy.x)) (\xy.y)
 Term 2 => (A (\xy.y) (\xy.x)) B (\xy.y)
 
 Term 1 OR Term 2 => Final Answer
 
-(A (A (\xy.y) (\xy.x)) (\xy.y)) (\xy.x) ((A (\xy.y) (\xy.x)) B (\xy.y))
+(A (B (\xy.y) (\xy.x)) (\xy.y)) (\xy.x) ((A (\xy.y) (\xy.x)) B (\xy.y))
 
 
 (* Problem 4 Solution *)
